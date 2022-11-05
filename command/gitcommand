@@ -1,0 +1,8 @@
+git init .
+git add .
+git status
+git commit -m "initial commit"
+git remote add origin https://github.com/vdubovsky/transactional-demo.git
+git remote -v
+git checkout -b main
+git push --set-upstream origin main -f

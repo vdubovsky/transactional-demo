@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+logging:
+  level:
+    org.springframework.orm.jpa: DEBUG
+    org.hibernate.type: TRACE
+
+    org.springframework.transaction: DEBUG

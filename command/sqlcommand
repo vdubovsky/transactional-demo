@@ -1,0 +1,153 @@
+DROP TABLE IF EXISTS customer;
+CREATE TABLE customer (
+    id BIGINT,
+    total_points BIGINT
+);
+
+
+
+
+-- READ UNCOMMITTED
+
+-- ********************************************************************************************************************
+
+-- READ UNCOMMITTED POSTGRES DEMO
+
+-- 1.      BEGIN TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+-- 2.                                                                      BEGIN TRANSACTION;
+-- 3.                                                                      INSERT INTO customer VALUES (1, 10);
+-- 4.      SELECT * FROM customer;
+-- 5.                                                                      COMMIT
+-- 6.      SELECT * FROM customer;
+-- 7.      COMMIT;
+
+-- READ UNCOMMITTED MYSQL DEMO
+
+-- 1. SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+-- 2. START TRANSACTION;
+-- 3.                                                                       START TRANSACTION;
+-- 4.                                                                       INSERT INTO customer VALUES (1, 10);
+-- 5. SELECT * FROM customer;
+-- 6.                                                                       COMMIT
+-- 7. SELECT * FROM customer;
+-- 8. COMMIT;
+
+-- ********************************************************************************************************************
+
+
+
+
+-- READ COMMITTED
+
+-- ********************************************************************************************************************
+
+-- READ COMMITTED POSTGRES DEMO
+
+-- 1. BEGIN TRANSACTION ISOLATION LEVEL READ COMMITTED;
+-- 2.                                                                       BEGIN TRANSACTION;
+-- 3.                                                                       INSERT INTO customer VALUES (2, 20);
+-- 4. SELECT * FROM customer;
+-- 5.                                                                       COMMIT
+-- 6. SELECT * FROM customer;
+-- 7. COMMIT;
+
+-- READ COMMITTED MYSQL DEMO
+
+-- 1. SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+-- 2. START TRANSACTION;
+-- 3.                                                                       START TRANSACTION;
+-- 4.                                                                       INSERT INTO customer VALUES (2, 20);
+-- 5. SELECT * FROM customer;
+-- 6.                                                                       COMMIT
+-- 7. SELECT * FROM customer;
+-- 8. COMMIT;
+
+-- ********************************************************************************************************************
+
+
+
+
+-- REPEATABLE READ
+
+-- ********************************************************************************************************************
+
+-- REPEATABLE READ POSTGRES DEMO
+
+-- 1. BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+-- 2. SELECT * FROM customer;
+-- 3.                                                                       BEGIN TRANSACTION;
+-- 4.                                                                       INSERT INTO customer VALUES (3, 30);
+-- 5.                                                                       COMMIT
+-- 6. SELECT * FROM customer;
+-- 7. COMMIT;
+
+-- DELETE FROM customer WHERE id = 3
+
+-- 1. BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+-- 2.                                                                       BEGIN TRANSACTION;
+-- 3.                                                                       INSERT INTO customer VALUES (3, 30);
+-- 4.                                                                       COMMIT
+-- 5. SELECT * FROM customer;
+-- 6. COMMIT;
+
+-- REPEATABLE READ MYSQL DEMO
+
+-- 1. SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+-- 2. START TRANSACTION;
+-- 3.                                                                       START TRANSACTION;
+-- 4.                                                                       INSERT INTO customer VALUES (3, 30);
+-- 5. SELECT * FROM customer;
+-- 6.                                                                       COMMIT
+-- 7. SELECT * FROM customer;
+-- 8. COMMIT;
+
+-- DELETE FROM customer WHERE id = 3
+
+-- 1. SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+-- 2. START TRANSACTION;
+-- 3.                                                                       START TRANSACTION;
+-- 4.                                                                       INSERT INTO customer VALUES (3, 30);
+-- 5.                                                                       COMMIT
+-- 6. SELECT * FROM customer;
+-- 7. COMMIT;
+
+-- ********************************************************************************************************************
+
+
+
+-- SERIALIZABLE
+
+-- ********************************************************************************************************************
+
+-- SERIALIZABLE POSTGRES DEMO
+
+-- 1. BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+-- 2. SELECT * FROM customer;
+-- 3.                                                                       BEGIN TRANSACTION;
+-- 4.                                                                       INSERT INTO customer VALUES (4, 40);
+-- 5.                                                                       COMMIT
+-- 6. SELECT * FROM customer;
+-- 7. COMMIT;
+
+-- SERIALIZABLE MYSQL DEMO
+
+-- 1. SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+-- 2. START TRANSACTION;
+-- 3.                                                                       START TRANSACTION;
+-- 4.                                                                       INSERT INTO customer VALUES (4, 40);
+-- 5. SELECT * FROM customer;
+-- 6.                                                                       COMMIT
+-- 7. SELECT * FROM customer;
+-- 8. COMMIT;
+
+-- DELETE FROM customer where id = 4;
+
+-- 1. SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+-- 2. START TRANSACTION;
+-- 3. SELECT * FROM customer
+-- 4.                                                                       START TRANSACTION;
+-- 5.                                                                       INSERT INTO customer VALUES (4, 40);
+-- 6. COMMIT
+-- 7.                                                                       COMMIT
+
+-- ********************************************************************************************************************

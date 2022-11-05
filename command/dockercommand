@@ -1,0 +1,9 @@
+docker run -e POSTGRES_PASSWORD=12345 -e POSTGRES_USER=vdubovsky -e POSTGRES_DB=transactional_demo_db -p 5432:5432 -it postgres
+
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=12345 -p 3306:3306 -d mysql
+docker exec -it mysql bash
+mysql -u root -p
+CREATE DATABASE transactional_demo_db
+USE transactional_demo_db;
+exit;
+exit;
