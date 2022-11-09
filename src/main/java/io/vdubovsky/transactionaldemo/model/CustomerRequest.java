@@ -2,6 +2,7 @@ package io.vdubovsky.transactionaldemo.model;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +19,10 @@ public class CustomerRequest {
 
     @Id
     @Column(name = "id")
+    @Type(type="uuid-char")
     private UUID id;
 
+    @Type(type="uuid-char")
     @Column(name = "transaction_id")
     private UUID transactionId;
 
