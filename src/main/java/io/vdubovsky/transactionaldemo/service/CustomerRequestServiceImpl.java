@@ -6,6 +6,8 @@ import io.vdubovsky.transactionaldemo.repo.CustomerRequestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -18,6 +20,8 @@ public class CustomerRequestServiceImpl implements CustomerRequestService {
     private final CustomerRequestRepository customerRequestRepository;
 
     @Override
+    //@Transactional
+    //@Transactional(isolation = Isolation.SERIALIZABLE)
     public CustomerRequest saveOrUpdateRequest(CustomerRequestStateChangeRecordDto dto) {
         Optional<CustomerRequest> existingRequestOpt = customerRequestRepository.findByTransactionId(dto.getTransactionId());
 
