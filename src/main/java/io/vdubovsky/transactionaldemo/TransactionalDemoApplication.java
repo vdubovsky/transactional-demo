@@ -1,7 +1,7 @@
 package io.vdubovsky.transactionaldemo;
 
 import io.vdubovsky.transactionaldemo.dto.CustomerRequestStateChangeRecordDto;
-import io.vdubovsky.transactionaldemo.service.CustomerRequestService;
+import io.vdubovsky.transactionaldemo.service.CustomerRequestServiceWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
 @RequiredArgsConstructor
 public class TransactionalDemoApplication implements CommandLineRunner {
 
-    private final CustomerRequestService customerRequestService;
+    private final CustomerRequestServiceWrapper customerRequestServiceWrapper;
 
     private final Executor executor = Executors.newCachedThreadPool();
 
@@ -51,9 +51,9 @@ public class TransactionalDemoApplication implements CommandLineRunner {
                     .setState("COMPLETED")
                     .setRecordAt(now);
 
-            executor.execute(() -> customerRequestService.saveOrUpdateRequest(started));
-            executor.execute(() -> customerRequestService.saveOrUpdateRequest(inProgress));
-            executor.execute(() -> customerRequestService.saveOrUpdateRequest(completed));
+            executor.execute(() -> customerRequestServiceWrapper.saveOrUpdateRequest(started));
+            executor.execute(() -> customerRequestServiceWrapper.saveOrUpdateRequest(inProgress));
+            executor.execute(() -> customerRequestServiceWrapper.saveOrUpdateRequest(completed));
         }
     }
 }
