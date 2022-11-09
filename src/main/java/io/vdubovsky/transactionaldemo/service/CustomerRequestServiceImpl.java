@@ -22,7 +22,7 @@ public class CustomerRequestServiceImpl implements CustomerRequestService {
     @Override
     //@Transactional
     //@Transactional(isolation = Isolation.SERIALIZABLE)
-    public CustomerRequest saveOrUpdateRequest(CustomerRequestStateChangeRecordDto dto) {
+    public synchronized CustomerRequest saveOrUpdateRequest(CustomerRequestStateChangeRecordDto dto) {
         Optional<CustomerRequest> existingRequestOpt = customerRequestRepository.findByTransactionId(dto.getTransactionId());
 
         if (existingRequestOpt.isPresent()) {
